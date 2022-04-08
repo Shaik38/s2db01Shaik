@@ -1,0 +1,19 @@
+extends layout
+
+block content
+    h1= title
+    p Welcome to #{title}.
+    br
+    p My self shaik abdul khayyam sahib
+    - let results=[{table_color:"White",table_size:"small",table_num:"22"},{table_color:"Black",table_size:"Medium",table_num:"12"},{table_color:"Yellow",table_size:"large",table_num:"22"}]
+    div(class="container-fluid")
+        div(class="row")
+            each tables , index in results
+                div(class="col-sm-2" onclick=`buy(${index+1})`) #{tables.table_color} - #{tables.table_size} - #{tables.table_num}
+
+    script.
+      function buy(index){
+          alert(`You purchased item ${index}`);
+      } 
+      
+                 

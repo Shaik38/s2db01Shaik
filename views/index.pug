@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  p Added a text
+
+   br
+  - var btnType = 'danger'
+  - var btnSize = 'sm'
+  button(type='button' onclick="moreClaps()" class='btn btn-' + btnType + ' btn-' + btnSize) Hit me
+
+  br
+  div(id="target") Clap for me
+
+  a(href="/tables") Table Page link
+  br
+  a(href="/addmods") Addmods Page link
+  br
+  a(href="/selector") Selector Page link
+  script.
+    var clap_count=0;
+    function moreClaps(){
+      clap_count =clap_count+2;
+      console.log("moreClaps method implemented");
+      document.getElementById("target").innerHTML = `Clap ${clap_count} times.`;
+    }

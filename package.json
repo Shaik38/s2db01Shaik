@@ -1,0 +1,22 @@
+{
+  "name": "s2wb01shaik",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "^4.17.3",
+    "http-errors": "~1.6.3",
+    "mongodb": "^4.5.0",
+    "mongoose": "^6.2.10",
+    "morgan": "^1.10.0",
+    "pug": "^3.0.2"
+  },
+  "main": "app.js",
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
