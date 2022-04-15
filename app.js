@@ -4,6 +4,14 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+const connectionString =  
+process.env.MONGO_CON 
+mongoose = require('mongoose'); 
+mongoose.connect(connectionString,  
+{useNewUrlParser: true, 
+useUnifiedTopology: true}); 
+
+var tables = require("./models/tables");
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var tableRouter = require('./routes/tables');
@@ -45,3 +53,36 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+// We can seed the collection if needed on server start
+async function recreateDB() {
+  // Delete everything in tables
+    await tables.deleteMany();
+  
+    let instance1 = new tables({ table_color: "White", table_size: 'small', table_num: 22 });
+    instance1.save(function (err, doc) {
+      if (err) return console.error(err);
+      console.log("First table stored in tables Class")
+    });
+  
+    let instance2 = new tables({ table_color: "Black", table_size: 'medium', table_num: 12 });
+    instance2.save(function (err, doc) {
+      if (err) return console.error(err);
+      console.log("Second table stored in tables Class")
+    });
+  
+    let instance3 = new tables({ table_color: "Yellow", table_size: 'large', table_num: 22 });
+    instance3.save(function (err, doc) {
+      if (err) return console.error(err);
+      console.log("Third table stored in tables Class")
+    });
+  }
+  let reseed = true;
+  if (reseed) { recreateDB(); }
+
+//Get the default connection
+var db = mongoose.connection;
+//Bind connection to error event
+db.on('error', console.error.bind(console, 'MongoDB connectionerror:'));
+db.once("open", function(){
+console.log("Connection to DB succeeded")});
