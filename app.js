@@ -11,10 +11,10 @@ mongoose.connect(connectionString,
 {useNewUrlParser: true, 
 useUnifiedTopology: true}); 
 
-var tables = require("./models/tables");
+var table = require("./models/table");
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var tableRouter = require('./routes/tables');
+var tablesRouter = require('./routes/tables');
 var addmodsRouter = require('./routes/addmods');
 var selectorRouter = require('./routes/selector');
 var resourceRouter = require('./routes/resource');
@@ -33,7 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/tables',tableRouter);
+app.use('/tables',tablesRouter);
 app.use('/addmods', addmodsRouter);
 app.use('/selector', selectorRouter);
 app.use('/resource', resourceRouter);
@@ -59,21 +59,21 @@ module.exports = app;
 // We can seed the collection if needed on server start
 async function recreateDB() {
   // Delete everything in tables
-    await tables.deleteMany();
+    await table.deleteMany();
   
-    let instance1 = new tables({ table_color: "White", table_size: 'small', table_num: 22 });
+    let instance1 = new table({ table_color: "White", table_size: 'small', table_num: 22 });
     instance1.save(function (err, doc) {
       if (err) return console.error(err);
       console.log("First table stored in tables Class")
     });
   
-    let instance2 = new tables({ table_color: "Black", table_size: 'medium', table_num: 12 });
+    let instance2 = new table({ table_color: "Black", table_size: 'medium', table_num: 12 });
     instance2.save(function (err, doc) {
       if (err) return console.error(err);
       console.log("Second table stored in tables Class")
     });
   
-    let instance3 = new tables({ table_color: "Yellow", table_size: 'large', table_num: 22 });
+    let instance3 = new table({ table_color: "Yellow", table_size: 'large', table_num: 22 });
     instance3.save(function (err, doc) {
       if (err) return console.error(err);
       console.log("Third table stored in tables Class")

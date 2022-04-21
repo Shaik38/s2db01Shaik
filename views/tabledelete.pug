@@ -1,0 +1,52 @@
+extends layout
+block content
+    h1= title
+
+    if (toShow == null)
+        h2 No instance to delete
+    else
+        - let tableid = toShow._id
+        - let table_color = toShow.table_color
+        - let table_size = toShow.table_size
+        - let table_num = toShow.table_num
+        - let actionid = "/resource/tables/" + tableid
+        script let actionid = "#{actionid}"
+        div
+            div.row
+                div(class='tableAttr mr-3') Table ID is:
+                div #{tableid}
+            div.row
+                div(class='tableAttr mr-3') Table Name is:
+                div #{table_color}
+            div.row
+                div(class='tableAttr mr-3') Table Size is:
+                div #{table_size}
+            div.row
+                div(class='tableAttr mr-3') Table Number is:
+                div #{table_num}
+
+        button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
+        button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+
+    script.
+        function cancel() {
+            // Go back to the home page for the table collection
+            window.location.href='/tables'
+        }
+    script.
+        function deleteOnid() {
+            console.log("starting delete")
+            // delete first
+            fetch(actionid, {
+                method: 'DELETE' // Don't need a body for the delete
+            }).then((resp) => {
+                return resp.json(); // or resp.text() or whatever the server sends
+            }).then((body) => {
+                alert("Delete succeded")
+                window.location.href='/zodiacs'
+                // TODO handle body
+            }).catch((error) => {
+                // TODO handle error
+                alert("Delete failed " + error )
+            });
+        }

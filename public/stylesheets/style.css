@@ -1,8 +1,27 @@
-body {
+/**
+ * @Author: Your name
+ * @Date:   2022-04-20 22:06:14
+ * @Last Modified by:   Your name
+ * @Last Modified time: 2022-04-20 23:27:47
+ */
+ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+.tableAttr {
+  background-color: aquamarine;
+  width: 120px;
+}
+
+.tableAttr:hover {
+  text-shadow:3px 3px 6px green;
+  font-style:oblique;
+  background-color: whitesmoke;
+  font-family:'Courier New', Courier, monospace;
+  box-shadow: 10px 5px 5px lightgreen;
 }

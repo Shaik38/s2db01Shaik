@@ -1,0 +1,31 @@
+extends layout
+
+
+block content
+ h1= title
+
+  - let tableid = toShow._id
+  - let table_color = toShow.table_color
+  - let table_size = toShow.table_size
+  - let table_num = toShow.table_num
+ div
+  div.row
+   div(class='tableAttr mr-3') Table ID is:
+   div #{tableid}
+  div.row
+   div(class='tableAttr mr-3') Table Name is:
+   div #{table_color}
+  div.row
+   div(class='tableAttr mr-3') Table Size  is:
+   div #{table_size}
+  div.row
+   div(class='tableAttr mr-3') Table Number is:
+   div #{table_num}
+  br
+  h3() Quick access links to view or make changes
+  br
+  button(class="btn btn-danger m-2" onclick=`window.open('/table/delete/?id=${tableid}', '_blank')`) Delete Item
+  button(class="btn btn-warning m-2" onclick=`window.open('/table/update/?id=${tableid}', '_blank')`) Update Item
+  button(class="btn btn-success m-2" onclick="window.open('/table/create', '_blank');") Create new Item
+  button(class="btn btn-info m-2" onclick="window.open('/table', '_blank');") Home Page
+ 

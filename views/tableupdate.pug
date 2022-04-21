@@ -1,0 +1,43 @@
+extends layout
+block content
+  h1= title
+  if (toShow == null)
+    h2 No instance to delete
+  else
+    - let tableid = toShow._id
+    - let table_color = toShow.table_color
+    - let table_size = toShow.table_size
+    - let table_num = toShow.table_num
+    div.row(class='mb-2')
+      div.mr-1 ID is
+      div #{tableid}
+    - let actionid = "/resource/tables/" + tableid 
+    form(id='TableForm', action= actionid, method="PUT")
+      div.form-group
+        label.tableAttr(for='table_color') Table Name
+        input#table_color(type='text' name='table_color', value= table_color )
+      div.form-group
+        label.tableAttr(for='table_size') Table Size
+        input#table_size(type='text' name='table_size', value= table_size )
+      div.form-group
+        label.tableAttr(for='table_num') Table Number 
+        input#table_num(type='number' name='table_num', value= table_num )
+      input(type="submit")
+
+  script.
+    document.forms['TableForm'].addEventListener('submit', (event) => {
+      event.preventDefault();
+      // TODO do something here to show user that form is being submitted
+      fetch(event.target.action, {
+        method: 'PUT',
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+      }).then((resp) => {
+        return resp.json(); // or resp.text() or whatever the server sends
+      }).then((body) => {
+        alert("Update succeded")
+        // TODO handle body
+      }).catch((error) => {
+        // TODO handle error
+      alert("Update failed " + error )
+      });
+    });
