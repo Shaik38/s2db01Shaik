@@ -1,19 +1,25 @@
 extends layout
 
 block content
-    h1= title
-    p Welcome to #{title}.
-    br
-    p My self shaik abdul khayyam sahib
-    - let results=[{table_color:"White",table_size:"small",table_num:"22"},{table_color:"Black",table_size:"Medium",table_num:"12"},{table_color:"Yellow",table_size:"large",table_num:"22"}]
-    div(class="container-fluid")
-        div(class="row")
-            each tables , index in results
-                div(class="col-sm-2" onclick=`buy(${index+1})`) #{tables.table_color} - #{tables.table_size} - #{tables.table_num}
-
-    script.
-      function buy(index){
-          alert(`You purchased item ${index}`);
-      } 
-      
-                 
+  h1= title
+  - let tables = results
+   div(class = "container-fluid")
+    div(class = "row m-1")
+     each table in tables  
+      - let destination = `dispatch(\"/tables/update?id=${table._id}\")`
+      //- let destination1 = `dispatch(\"/Season/create\")`
+      //- let destination2 = `dispatch(\"/Season/detail?id=${item._id}\")`
+      //- let destination3 = `dispatch(\"/Season/delete?id=${item._id}\")`
+      div(class="row-sm-2", class="m-1") table: #{table.table_color}(#{table.table_size}) is #{table.table_num}  
+        button.btn( class="btn-primary ml-1", onclick= destination, style = "margin:8px;") Update
+        //-button.btn( class="btn-primary ml-1", onclick= destination1, style = "margin:8px;" ) Create
+        //-button.btn( class="btn-primary ml-1", onclick= destination2, style = "margin:8px;" ) Detail
+        //-button.btn( class="btn-primary ml-1", onclick= destination3, style = "margin:8px;" ) Delete
+  script.
+    function buy(table){
+        alert(`You purchased item ${table+1}`)
+    }
+  script. 
+    function dispatch(path){ 
+        window.location.href=path 
+    } 
